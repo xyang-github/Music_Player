@@ -10,6 +10,8 @@ from kivy.core.audio import SoundLoader
 Builder.load_file('frontend.kv')
 
 
+
+
 class LoadDialog(FloatLayout):
     """Shows the load dialog box"""
     load = ObjectProperty(None)  # initiates self.load()
