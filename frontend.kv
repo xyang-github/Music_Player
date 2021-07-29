@@ -1,0 +1,54 @@
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filedirectory
+            path: "/Users/xingyang/Music"
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Load"
+                on_release: root.load(filedirectory.selection)
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+<PlayerFunctions>:
+    GridLayout:
+        cols: 1
+        Image:
+        Label:
+            id: song_duration
+            name: "song_duration"
+            text: ""
+        GridLayout:
+            cols: 2
+            Button:
+                id: play_pause
+                name: "play_pause"
+                text: ""
+                on_press: root.play()
+            Button:
+                id: load
+                name: "load"
+                text: "Load Track"
+                on_press: root.load_track()
+        Label:
+            id: title
+            text: ""
+        Label:
+            id: album
+            text: ""
+        Label:
+            id: artist
+            text: ""
+
+
+
+<RootWidget>:
+    PlayerFunctions:
+        id: player_screen
+        name: "player_screen"
