@@ -20,34 +20,33 @@
     id: music_player
     name: "music_player"
     GridLayout:
-        cols: 2
-        Button:
-            id: play_pause
-            name: "play_pause"
-            text: root.pause_play_text
-            on_press: root.play_pause()
-        Button:
-            id: load
-            name: "load"
-            text: "Load Track"
-            on_press: root.load_window()
-
+        cols: 1
+        Image:
+        Label:
+            id: song_duration
+            name: "song_duration"
+            text:
+        Label:
+            id: title
+            text: ""
+        Label:
+            id: album
+            text: ""
+        Label:
+            id: artist
+            text: ""
         GridLayout:
-            cols: 1
-            Image:
-            Label:
-                id: song_duration
-                name: "song_duration"
-                text: ""
-            Label:
-                id: title
-                text: ""
-            Label:
-                id: album
-                text: ""
-            Label:
-                id: artist
-                text: ""
+            cols: 2
+            Button:
+                id: play_pause
+                name: "play_pause"
+                text: root.pause_play_text
+                on_press: root.play_pause()
+            Button:
+                id: load
+                name: "load"
+                text: "Load Track"
+                on_press: root.load_window()
 
 <RootWidget>:
     MusicPlayer:

@@ -1,3 +1,5 @@
+import datetime
+
 import mutagen
 from kivy.app import App
 from kivy.core.text import Label
@@ -19,7 +21,7 @@ class LoadDialog(FloatLayout):
     cancel = ObjectProperty(None)  # initiates self.dismiss_popup()
 
 
-class MusicPlayer:
+class MusicPlayer(Screen):
     """Methods for loading a track"""
     pause_play_text = StringProperty("")
     file_selection = ObjectProperty(None)  # store path to selected file
@@ -40,10 +42,12 @@ class MusicPlayer:
     def load_track(self, file_selection):
         """Stores path to selected file to file_selection"""
         self.song = Playback()  # instantiates Playback object for song
-        self.file_selection = file_selection[0]  # convert list to string for file path
+        self.file_selection = file_selection[0]  # returns path in a list
         self.dismiss_popup()  # closes load_window pop-up once track is selected
         self.song.load_file(self.file_selection)
         self.song.play()
+        self.duration()
+        self.music_information()
         self.pause_play_text = "Pause"
 
     def play_pause(self):
@@ -55,26 +59,19 @@ class MusicPlayer:
             self.song.resume()
             self.pause_play_text = "Pause"
 
+    def duration(self):
+        """Displays duration of song in hh:mm:ss"""
+        song_duration = datetime.timedelta(seconds=self.song.duration)
+        song_duration = str(song_duration)[:7]
+        self.ids.song_duration.text = song_duration
 
-    # def duration(self):
-    """Displays duration of song in hh:mm:ss"""
-    # min = int(self.sound.length // 60)
-    # if min >= 60:
-    #     hour = min // 60
-    #     min = min % 60
-    #     sec = int(self.sound.length - ((hour*3600) + (min * 60)))
-    #     self.ids.song_duration.text = str(hour) + ":" + str(min) + ":" + str(sec).zfill(2)
-    # else:
-    #     sec = int(self.sound.length % 60)
-    #     self.ids.song_duration.text = str(min) + ":" + str(sec).zfill(2)
+    def music_information(self):
+        """Displays song title, album and artist"""
+        song = mutagen.File(str(self.file_selection), easy=True)
+        self.ids.title.text = song['title'][0]
+        self.ids.album.text = song['album'][0]
+        self.ids.artist.text = song['artist'][0]
 
-
-# def music_information(self):
-#     """Displays song title, album and artist"""
-#     song = mutagen.File(str(self.file_selection), easy=True)
-#     self.ids.title.text = song['title'][0]
-#     self.ids.album.text = song['album'][0]
-#     self.ids.artist.text = song['artist'][0]
 
 class RootWidget(ScreenManager):
     pass
