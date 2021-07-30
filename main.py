@@ -1,5 +1,4 @@
 import datetime
-
 import mutagen
 from kivy.app import App
 from kivy.core.text import Label
@@ -11,6 +10,8 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 # from kivy.core.audio import SoundLoader
 from just_playback import Playback
+from kivy.core.window import Window
+Window.size = (400, 600)
 
 Builder.load_file('frontend.kv')
 
@@ -48,7 +49,7 @@ class MusicPlayer(Screen):
         self.song.play()
         self.duration()
         self.music_information()
-        self.pause_play_text = "Pause"
+        self.ids.play_pause.background_normal = "images/pause.png"
 
     def play_pause(self):
         """Toggles between play/resume and pause functions"""

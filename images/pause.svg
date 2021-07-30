@@ -2,14 +2,14 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="146.46393mm"
+   height="142.5574mm"
+   viewBox="0 0 146.46393 142.5574"
    version="1.1"
    id="svg5"
    inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
    sodipodi:docname="pause.svg"
-   inkscape:export-filename="/Users/xingyang/Documents/GitHub/Music_Player/play.png"
+   inkscape:export-filename="/Users/xingyang/Documents/GitHub/Music_Player/pause.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -29,24 +29,24 @@
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:zoom="0.67348485"
-     inkscape:cx="104.67942"
-     inkscape:cy="561.25984"
-     inkscape:window-width="1920"
+     inkscape:cx="0.7424072"
+     inkscape:cy="249.44882"
+     inkscape:window-width="1312"
      inkscape:window-height="936"
-     inkscape:window-x="1440"
+     inkscape:window-x="1750"
      inkscape:window-y="25"
-     inkscape:window-maximized="1"
+     inkscape:window-maximized="0"
      inkscape:current-layer="layer1">
     <sodipodi:guide
-       position="101.35714,143"
+       position="73.897441,71.142412"
        orientation="1,0"
        id="guide2184" />
     <sodipodi:guide
-       position="87.999996,184.64286"
+       position="60.540297,112.78527"
        orientation="0,-1"
        id="guide5782" />
     <sodipodi:guide
-       position="87.999996,101.35715"
+       position="60.540297,29.499562"
        orientation="0,-1"
        id="guide5784" />
   </sodipodi:namedview>
@@ -55,7 +55,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Circle">
+     inkscape:label="Circle"
+     transform="translate(-27.459699,-82.585008)">
     <ellipse
        style="fill:#e6e6e6;fill-opacity:0.0283401;stroke:#d3d3d3;stroke-width:6.61458;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="path5156"
@@ -75,7 +76,8 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-27.459699,-82.585008)">
     <rect
        style="fill:#e6e6e6;fill-opacity:0.0283401;stroke:#d3d3d3;stroke-width:6.61458;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect5786"

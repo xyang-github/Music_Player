@@ -2,13 +2,16 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="146.46393mm"
+   height="142.5574mm"
+   viewBox="0 0 146.46393 142.5574"
    version="1.1"
    id="svg5"
    inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
    sodipodi:docname="play.svg"
+   inkscape:export-filename="/Users/xingyang/bitmap.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,26 +28,29 @@
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:zoom="0.67348485"
-     inkscape:cx="104.67942"
-     inkscape:cy="561.25984"
+     inkscape:zoom="0.53921223"
+     inkscape:cx="136.30996"
+     inkscape:cy="309.71107"
      inkscape:window-width="1920"
      inkscape:window-height="936"
      inkscape:window-x="1440"
      inkscape:window-y="25"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1">
+     inkscape:current-layer="layer1"
+     inkscape:lockguides="true">
     <sodipodi:guide
-       position="87.999998,210.96429"
+       position="60.540299,139.1067"
        orientation="1,0"
-       id="guide2184" />
+       id="guide2184"
+       inkscape:locked="true" />
   </sodipodi:namedview>
   <defs
      id="defs2" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-27.459699,-82.585008)">
     <g
        id="g5052"
        transform="translate(-9.4285722,21.607143)">

@@ -19,43 +19,98 @@
 <MusicPlayer>:
     id: music_player
     name: "music_player"
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
     GridLayout:
         cols: 1
         Image:
-            size_hint_y: 0.7
+            size_hint_y: 0.4
+            source: "images/play.png"
         Label:
-            size_hint_y: 0.05
             id: song_duration
-            name: "song_duration"
-            text:
+            size_hint_y: 0.02
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            font_name: "Roboto-Regular"
+            font_size: 14
+            text_size: self.size
+            color: (0,0,0,1)
+            halign: "center"
+            text: "example - duration"
         Label:
-            size_hint_y: 0.05
             id: title
-            text: ""
-        Label:
             size_hint_y: 0.05
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            font_name: "fonts/Aileron-Regular.otf"
+            font_size: 24
+            text_size: self.size
+            padding_x: 15
+            halign: "left"
+            valign: "middle"
+            color: 192, 192, 192, 1
+            text: "Hikari"
+        Label:
             id: album
-            text: ""
+            size_hint_y: 0.02
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            font_name: "fonts/Aileron-Regular.otf"
+            font_size: 14
+            text_size: self.size
+            padding_x: 35
+            halign: "left"
+            valign: "top"
+            color: 192, 192, 192, 1
+            text: "example - album"
         Label:
-            size_hint_y: 0.05
             id: artist
-            text: ""
+            size_hint_y: 0.04
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            font_name: "fonts/Aileron-Regular.otf"
+            font_size: 14
+            text_size: self.size
+            padding_x: 35
+            halign: "left"
+            valign: "top"
+            color: 192, 192, 192, 1
+            text: "example - artist"
         GridLayout:
             cols: 2
+            size_hint_y: 0.25
             Button:
-                size_hint_y: 0.1
                 id: play_pause
                 name: "play_pause"
-                text: root.pause_play_text
+                size: 150, 150
+                size_hint: None, None
+                background_normal: 'images/pause.png'
                 on_press: root.play_pause()
             Button:
-                size_hint_y: 0.1
                 id: load
                 name: "load"
                 text: "Load Track"
                 on_press: root.load_window()
 
 <RootWidget>:
+
     MusicPlayer:
         id: music_player
         name: "music_player"
