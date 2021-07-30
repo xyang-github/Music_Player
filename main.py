@@ -42,7 +42,7 @@ class MusicPlayer(Screen):
     def load_track(self, file_selection):
         """Stores path to selected file to file_selection"""
         self.song = Playback()  # instantiates Playback object for song
-        self.file_selection = file_selection[0]  # returns path in a list
+        self.file_selection = file_selection[0]  # stores path list as string
         self.dismiss_popup()  # closes load_window pop-up once track is selected
         self.song.load_file(self.file_selection)
         self.song.play()

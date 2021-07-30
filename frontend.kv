@@ -22,27 +22,34 @@
     GridLayout:
         cols: 1
         Image:
+            size_hint_y: 0.7
         Label:
+            size_hint_y: 0.05
             id: song_duration
             name: "song_duration"
             text:
         Label:
+            size_hint_y: 0.05
             id: title
             text: ""
         Label:
+            size_hint_y: 0.05
             id: album
             text: ""
         Label:
+            size_hint_y: 0.05
             id: artist
             text: ""
         GridLayout:
             cols: 2
             Button:
+                size_hint_y: 0.1
                 id: play_pause
                 name: "play_pause"
                 text: root.pause_play_text
                 on_press: root.play_pause()
             Button:
+                size_hint_y: 0.1
                 id: load
                 name: "load"
                 text: "Load Track"
