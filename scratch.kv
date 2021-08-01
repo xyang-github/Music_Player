@@ -8,7 +8,7 @@
             path: "/Users/xingyang/Music"
         BoxLayout:
             size_hint_y: None
-            height: 50
+            height: 30
             Button:
                 text: "Load"
                 on_release: root.load(filedirectory.selection)
@@ -26,7 +26,7 @@
         cols: 1
         Image:
             size_hint_y: 0.4
-            source:
+            source: "images/play.png"
         Label:
             id: song_duration
             size_hint_y: 0.02
@@ -95,18 +95,18 @@
             text: "example - artist"
         GridLayout:
             cols: 2
+            size_hint_x: 1
             size_hint_y: 0.25
             Button:
                 id: play_pause
                 name: "play_pause"
-                background_normal: "images/Play-normal.png"
-                background_down: "images/Play-down.png"
+                background_color: (1,1,1,1)
+                size_hint: None, None
                 on_press: root.play_pause()
             Button:
                 id: load
                 name: "load"
-                background_normal: "images/Load-normal.png"
-                background_down: "images/Load-down.png"
+                text: "Load Track"
                 on_press: root.load_window()
 
 <RootWidget>:
