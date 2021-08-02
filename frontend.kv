@@ -16,13 +16,12 @@
                 text: "Cancel"
                 on_release: root.cancel()
 
+
 <MusicPlayer>:
     id: music_player
     name: "music_player"
-    canvas.before:
-        Color:
-            rgba: 1, 1, 1, 1
     GridLayout:
+        rows: 6
         cols: 1
         Image:
             id: album_art
@@ -31,45 +30,31 @@
         Label:
             id: song_duration
             size_hint_y: 0.02
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, 1
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
             font_name: "Roboto-Regular"
             font_size: 14
             text_size: self.size
             color: (0,0,0,1)
             halign: "center"
             text: "example - duration"
-
-        Label:
-            id: title
+        ScrollView:
+            id: title_scroll
             size_hint_y: 0.05
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, 1
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
-            font_name: "fonts/Aileron-Regular.otf"
-            font_size: 24
-            text_size: self.size
-            padding_x: 15
-            halign: "left"
-            valign: "middle"
-            color: 192, 192, 192, 1
-            text: "Hikari"
+            effect_cls: "ScrollEffect"
+            scroll_x: 0
+
+            Label:
+                id: title
+                size_hint_x: None
+                width: self.texture_size[0]
+                font_name: "fonts/Aileron-Regular.otf"
+                font_size: 24
+                text_size: None, self.height
+                color: 192, 192, 192, 1
+                padding_x: 20
+                text:
         Label:
             id: album
             size_hint_y: 0.02
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, 1
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
             font_name: "fonts/Aileron-Regular.otf"
             font_size: 14
             text_size: self.size
@@ -81,12 +66,6 @@
         Label:
             id: artist
             size_hint_y: 0.04
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, 1
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
             font_name: "fonts/Aileron-Regular.otf"
             font_size: 14
             text_size: self.size
@@ -112,7 +91,12 @@
                 on_press: root.load_window()
 
 <RootWidget>:
-
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
     MusicPlayer:
         id: music_player
         name: "music_player"

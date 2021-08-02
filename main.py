@@ -1,5 +1,6 @@
 import datetime
 import mutagen
+from kivy.animation import Animation
 from kivy.app import App
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.floatlayout import FloatLayout
@@ -8,8 +9,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from just_playback import Playback
 from kivy.core.window import Window
-Window.size = (400, 600)
+from kivy.uix.scrollview import ScrollView
 
+Window.size = (400, 600)
 
 Builder.load_file('frontend.kv')
 
@@ -69,9 +71,17 @@ class MusicPlayer(Screen):
     def music_information(self):
         """Displays song title, album and artist"""
         song = mutagen.File(self.file_selection)
-        self.ids.title.text = str(song['TIT2'])
-        self.ids.album.text = str(song['TALB'])
-        self.ids.artist.text = str(song['TPE1'])
+        self.ids.title.text = str(song['TIT2'])  # title
+
+        # Create an animated title that scrolls horizontally
+        scrolling_effect = Animation(x=-600, opacity=0, duration=7.0)
+        scrolling_effect += Animation(opacity=1, duration=0)
+        scrolling_effect += Animation(x=400, duration=0)
+        scrolling_effect.repeat = True
+        scrolling_effect.start(self.ids.title)
+
+        self.ids.album.text = str(song['TALB'])  # album
+        self.ids.artist.text = str(song['TPE1'])  # artist
 
         try:
             artwork = song.tags['APIC:'].data  # retrieves album art from ID3 tags
@@ -80,8 +90,6 @@ class MusicPlayer(Screen):
             self.ids.album_art.source = "images/album_cover.jpg"
         except:
             self.ids.album_art.source = "images/default_cover.png"  # default album cover if not in tag
-
-
 
 
 class RootWidget(ScreenManager):
