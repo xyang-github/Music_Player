@@ -68,10 +68,20 @@ class MusicPlayer(Screen):
 
     def music_information(self):
         """Displays song title, album and artist"""
-        song = mutagen.File(str(self.file_selection), easy=True)
-        self.ids.title.text = song['title'][0]
-        self.ids.album.text = song['album'][0]
-        self.ids.artist.text = song['artist'][0]
+        song = mutagen.File(self.file_selection)
+        self.ids.title.text = str(song['TIT2'])
+        self.ids.album.text = str(song['TALB'])
+        self.ids.artist.text = str(song['TPE1'])
+
+        try:
+            artwork = song.tags['APIC:'].data  # retrieves album art from ID3 tags
+            with open('images/album_cover.jpg', 'wb') as img:
+                img.write(artwork)
+            self.ids.album_art.source = "images/album_cover.jpg"
+        except:
+            self.ids.album_art.source = "images/default_cover.png"  # default album cover if not in tag
+
+
 
 
 class RootWidget(ScreenManager):
