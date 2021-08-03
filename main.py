@@ -11,8 +11,6 @@ from kivy.lang import Builder
 from just_playback import Playback
 from kivy.core.window import Window
 
-from kivy.uix.scrollview import ScrollView
-
 Window.size = (400, 600)
 
 Builder.load_file('frontend.kv')
@@ -68,17 +66,17 @@ class MusicPlayer(Screen):
         """Displays duration of song in hh:mm:ss, and updates slider"""
         current_pos = datetime.timedelta(seconds=self.song.curr_pos)
         current_pos = str(current_pos)[:7]
-        self.ids.current_position.text = str(current_pos)  # updates text
-        self.ids.song_duration.value = int(self.song.curr_pos)  # updates slider
+
+        track_length = datetime.timedelta(seconds=self.song.duration)
+        track_length = str(track_length)[:7]
+
+        self.ids.current_position.text = f"{current_pos} | {track_length}"  # updates text
+        self.ids.song_slider.value = int(self.song.curr_pos)  # updates slider
 
     def music_information(self):
         """Displays song duration, title, album and artist"""
-        #song_duration = datetime.timedelta(seconds=self.song.duration)
         if self.song.active:
-            track_length = datetime.timedelta(seconds=self.song.duration)
-            track_length = str(track_length)[:7]
-            self.ids.song_duration.max = int(self.song.duration)
-            self.ids.song_length.text = str(track_length)
+            self.ids.song_slider.max = int(self.song.duration)
             Clock.schedule_interval(self.song_position, 0.5)
         else:
             self.ids.song_duration.text = "---"
@@ -94,13 +92,11 @@ class MusicPlayer(Screen):
         self.ids.album.text = str(song['TALB'])  # album
         self.ids.artist.text = str(song['TPE1'])  # artist
 
-        try:
-            artwork = song.tags['APIC:'].data  # retrieves album art from ID3 tags
-            with open('images/album_cover.jpg', 'wb') as img:
-                img.write(artwork)
-            self.ids.album_art.source = "images/album_cover.jpg"
-        except:
-            self.ids.album_art.source = "images/default_cover.png"  # default album cover if not in tag
+        artwork = song.tags['APIC:'].data  # Extract album cover
+        with open('images/album_cover.jpg', 'wb') as img:
+            img.write(artwork)
+        self.ids.album_art.source = "images/album_cover.jpg"
+        self.ids.album_art.reload()  # refreshes images when changing tracks
 
 
 class RootWidget(ScreenManager):
