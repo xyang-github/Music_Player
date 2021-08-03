@@ -1,0 +1,40 @@
+      Label:
+            id: title
+            size_hint_y: 0.05
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            font_name: "fonts/Aileron-Regular.otf"
+            font_size: 24
+            text_size: self.size
+            padding_x: 15
+            halign: "left"
+            valign: "middle"
+            color: 192, 192, 192, 1
+            text: "Hikari"
+
+
+        ScrollView:
+            id: title_scroll
+            size_hint_y: 0.05
+            effect_cls: "ScrollEffect"
+            scroll_y: -1
+            Label:
+                id: title
+                size_hint_x: None
+                width: self.texture_size[0]
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                font_name: "fonts/Aileron-Regular.otf"
+                font_size: 24
+                text_size: None, self.height
+                color: 192, 192, 192, 1
+                padding_x: 15
+                text: "HikariHikariHikariHikariHikariHikariHikariHikariHikariHikariHikariHikariHikariHikariHikari"
