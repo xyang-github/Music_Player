@@ -2,6 +2,7 @@ import datetime
 import mutagen
 from kivy.animation import Animation
 from kivy.app import App
+from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
@@ -47,7 +48,7 @@ class MusicPlayer(Screen):
         self.dismiss_popup()  # closes load_window pop-up once track is selected
         self.song.load_file(self.file_selection)
         self.song.play()
-        self.duration()
+        #self.duration()
         self.music_information()
         self.ids.play_pause.background_normal = "images/Pause-normal.png"
 
@@ -62,14 +63,24 @@ class MusicPlayer(Screen):
             self.ids.play_pause.background_normal = "images/Pause-normal.png"
             self.ids.play_pause.background_down = "images/Pause-down.png"
 
-    def duration(self):
+    def song_position(self, dt):
         """Displays duration of song in hh:mm:ss"""
-        song_duration = datetime.timedelta(seconds=self.song.duration)
+        song_duration = datetime.timedelta(seconds=self.song.curr_pos)
         song_duration = str(song_duration)[:7]
-        self.ids.song_duration.text = song_duration
+        self.ids.song_duration.text = str(song_duration)
+
+        # song_duration = datetime.timedelta(seconds=self.song.duration)
+        # song_duration = str(song_duration)[:7]
+        # self.ids.song_duration.text = song_duration
+
 
 
     def music_information(self):
+        if self.song.active:
+            Clock.schedule_interval(self.song_position, 0.5)
+        else:
+            self.ids.song_duration.text = "---"
+
         """Displays song title, album and artist"""
         song = mutagen.File(self.file_selection)
         self.ids.title.text = str(song['TIT2'])  # title
