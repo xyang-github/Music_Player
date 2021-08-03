@@ -47,8 +47,8 @@ class MusicPlayer(Screen):
         self.file_selection = file_selection[0]  # stores path list as string
         self.dismiss_popup()  # closes load_window pop-up once track is selected
         self.song.load_file(self.file_selection)
+        self.ids.play_pause.disabled = False
         self.song.play()
-        #self.duration()
         self.music_information()
         self.ids.play_pause.background_normal = "images/Pause-normal.png"
 
@@ -69,19 +69,13 @@ class MusicPlayer(Screen):
         song_duration = str(song_duration)[:7]
         self.ids.song_duration.text = str(song_duration)
 
-        # song_duration = datetime.timedelta(seconds=self.song.duration)
-        # song_duration = str(song_duration)[:7]
-        # self.ids.song_duration.text = song_duration
-
-
-
     def music_information(self):
+        """Displays song duration, title, album and artist"""
         if self.song.active:
             Clock.schedule_interval(self.song_position, 0.5)
         else:
             self.ids.song_duration.text = "---"
 
-        """Displays song title, album and artist"""
         song = mutagen.File(self.file_selection)
         self.ids.title.text = str(song['TIT2'])  # title
 

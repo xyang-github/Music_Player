@@ -20,16 +20,16 @@
     id: music_player
     name: "music_player"
     GridLayout:
-        rows: 6
         cols: 1
         padding: 15
         Image:
             id: album_art
-            size_hint_y: 0.4
+            size_hint_y: 0.475
             source:
         Label:
             id: song_duration
-            size_hint_y: 0.02
+            size_hint_y: 0.05
+
             font_name: "Roboto-Regular"
             font_size: 14
             text_size: self.size
@@ -38,7 +38,7 @@
             text:
         ScrollView:
             id: title_scroll
-            size_hint_y: 0.05
+            size_hint_y: 0.1
             effect_cls: "ScrollEffect"
             scroll_x: 0
             Label:
@@ -53,7 +53,7 @@
                 text:
         Label:
             id: album
-            size_hint_y: 0.02
+            size_hint_y: 0.025
             font_name: "fonts/Aileron-Regular.otf"
             font_size: 14
             text_size: self.size
@@ -61,10 +61,10 @@
             halign: "left"
             valign: "top"
             color: 192, 192, 192, 1
-            text: "example - album"
+            text:
         Label:
             id: artist
-            size_hint_y: 0.04
+            size_hint_y: 0.025
             font_name: "fonts/Aileron-Regular.otf"
             font_size: 14
             text_size: self.size
@@ -72,19 +72,24 @@
             halign: "left"
             valign: "top"
             color: 192, 192, 192, 1
-            text: "example - artist"
-        GridLayout:
-            cols: 2
-            size_hint_y: 0.25
+            text:
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.3
             Button:
                 id: play_pause
                 name: "play_pause"
+                disabled: True
+                background_disabled_normal: ''
+                size_hint_x: .5
+                pos_hint: {'center_x':.5, 'center_y':.5}
                 background_normal: "images/Play-normal.png"
                 background_down: "images/Play-down.png"
                 on_press: root.play_pause()
             Button:
                 id: load
                 name: "load"
+                size_hint_x: .5
                 background_normal: "images/Load-normal.png"
                 background_down: "images/Load-down.png"
                 on_press: root.load_window()
