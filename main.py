@@ -10,6 +10,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from just_playback import Playback
 from kivy.core.window import Window
+
 from kivy.uix.scrollview import ScrollView
 
 Window.size = (400, 600)
@@ -64,14 +65,20 @@ class MusicPlayer(Screen):
             self.ids.play_pause.background_down = "images/Pause-down.png"
 
     def song_position(self, dt):
-        """Displays duration of song in hh:mm:ss"""
-        song_duration = datetime.timedelta(seconds=self.song.curr_pos)
-        song_duration = str(song_duration)[:7]
-        self.ids.song_duration.text = str(song_duration)
+        """Displays duration of song in hh:mm:ss, and updates slider"""
+        current_pos = datetime.timedelta(seconds=self.song.curr_pos)
+        current_pos = str(current_pos)[:7]
+        self.ids.current_position.text = str(current_pos)  # updates text
+        self.ids.song_duration.value = int(self.song.curr_pos)  # updates slider
 
     def music_information(self):
         """Displays song duration, title, album and artist"""
+        #song_duration = datetime.timedelta(seconds=self.song.duration)
         if self.song.active:
+            track_length = datetime.timedelta(seconds=self.song.duration)
+            track_length = str(track_length)[:7]
+            self.ids.song_duration.max = int(self.song.duration)
+            self.ids.song_length.text = str(track_length)
             Clock.schedule_interval(self.song_position, 0.5)
         else:
             self.ids.song_duration.text = "---"
