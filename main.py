@@ -68,16 +68,15 @@ class MusicPlayer(Screen):
         song_duration = str(song_duration)[:7]
         self.ids.song_duration.text = song_duration
 
+
     def music_information(self):
         """Displays song title, album and artist"""
         song = mutagen.File(self.file_selection)
         self.ids.title.text = str(song['TIT2'])  # title
 
         # Create an animated title that scrolls horizontally
-        scrolling_effect = Animation(x=-600, opacity=0, duration=7.0)
-        scrolling_effect += Animation(opacity=1, duration=0)
-        scrolling_effect += Animation(x=400, duration=0)
-        scrolling_effect.repeat = True
+        scrolling_effect = Animation(x=-400, opacity=0, duration=7)
+        scrolling_effect += Animation(pos=(0,0), opacity=1, duration=2)
         scrolling_effect.start(self.ids.title)
 
         self.ids.album.text = str(song['TALB'])  # album

@@ -16,13 +16,14 @@
                 text: "Cancel"
                 on_release: root.cancel()
 
-
 <MusicPlayer>:
     id: music_player
     name: "music_player"
     GridLayout:
         rows: 6
         cols: 1
+        padding: 15
+
         Image:
             id: album_art
             size_hint_y: 0.4
@@ -41,13 +42,12 @@
             size_hint_y: 0.05
             effect_cls: "ScrollEffect"
             scroll_x: 0
-
             Label:
                 id: title
                 size_hint_x: None
                 width: self.texture_size[0]
                 font_name: "fonts/Aileron-Regular.otf"
-                font_size: 24
+                font_size: 36
                 text_size: None, self.height
                 color: 192, 192, 192, 1
                 padding_x: 20
@@ -58,7 +58,7 @@
             font_name: "fonts/Aileron-Regular.otf"
             font_size: 14
             text_size: self.size
-            padding_x: 35
+            padding_x: 50
             halign: "left"
             valign: "top"
             color: 192, 192, 192, 1
@@ -69,7 +69,7 @@
             font_name: "fonts/Aileron-Regular.otf"
             font_size: 14
             text_size: self.size
-            padding_x: 35
+            padding_x: 50
             halign: "left"
             valign: "top"
             color: 192, 192, 192, 1
