@@ -20,72 +20,87 @@
     id: music_player
     name: "music_player"
     GridLayout:
-        rows: 6
         cols: 1
         padding: 15
-
         Image:
             id: album_art
-            size_hint_y: 0.4
+            size_hint_y: None
+            height: 300
             source:
+        Slider:
+            id: song_slider
+            size_hint_y: None
+            height: 15
+            cursor_size: 10, 10
+            background_width: 10
+            min: 0
+            max:
+            value:
+            on_touch_up: root.change_position()
         Label:
-            id: song_duration
-            size_hint_y: 0.02
-            font_name: "Roboto-Regular"
-            font_size: 14
+            id: current_position
+            size_hint_y: None
+            height: 20
+            padding_x: 15
             text_size: self.size
-            color: (0,0,0,1)
-            halign: "center"
-            text: "example - duration"
+            font_size: 12
+            color: 192, 192, 192, 1
+            text:
         ScrollView:
             id: title_scroll
-            size_hint_y: 0.05
             effect_cls: "ScrollEffect"
             scroll_x: 0
             Label:
                 id: title
                 size_hint_x: None
                 width: self.texture_size[0]
-                font_name: "fonts/Aileron-Regular.otf"
+                font_name: "fonts/BalooChettan2-Regular.ttf"
                 font_size: 36
-                text_size: None, self.height
                 color: 192, 192, 192, 1
-                padding_x: 20
+                padding_x: 5
                 text:
         Label:
             id: album
-            size_hint_y: 0.02
+            size_hint_y: None
+            height: 20
             font_name: "fonts/Aileron-Regular.otf"
             font_size: 14
             text_size: self.size
-            padding_x: 50
+            padding_x: 30
             halign: "left"
-            valign: "top"
             color: 192, 192, 192, 1
-            text: "example - album"
+            text:
         Label:
             id: artist
-            size_hint_y: 0.04
-            font_name: "fonts/Aileron-Regular.otf"
+            size_hint_y: None
+            height: 15
+            font_name: "fonts/BalooChettan2-Bold.ttf"
             font_size: 14
             text_size: self.size
-            padding_x: 50
+            padding_x: 30
             halign: "left"
-            valign: "top"
-            color: 192, 192, 192, 1
-            text: "example - artist"
-        GridLayout:
-            cols: 2
-            size_hint_y: 0.25
+            color: [192, 192, 192, 1]
+            bold: True
+            text:
+        FloatLayout:
+            size: 100, 100
             Button:
                 id: play_pause
                 name: "play_pause"
+                disabled: True
+                background_disabled_normal: ''
+                size_hint: None, None
+                size: 100, 100
+                pos_hint: {"left": 1}
                 background_normal: "images/Play-normal.png"
                 background_down: "images/Play-down.png"
                 on_press: root.play_pause()
             Button:
                 id: load
                 name: "load"
+                size_hint: None, None
+                size: 100, 100
+                pos_hint: {"right": 1}
                 background_normal: "images/Load-normal.png"
                 background_down: "images/Load-down.png"
                 on_press: root.load_window()
