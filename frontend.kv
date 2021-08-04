@@ -36,6 +36,7 @@
             min: 0
             max:
             value:
+            on_touch_up: root.change_position()
         Label:
             id: current_position
             size_hint_y: None
@@ -53,7 +54,7 @@
                 id: title
                 size_hint_x: None
                 width: self.texture_size[0]
-                font_name: "fonts/Aileron-Regular.otf"
+                font_name: "fonts/BalooChettan2-Regular.ttf"
                 font_size: 36
                 color: 192, 192, 192, 1
                 padding_x: 5
@@ -73,8 +74,8 @@
             id: artist
             size_hint_y: None
             height: 15
-            font_name: "fonts/Aileron-Regular.otf"
-            font_size: 16
+            font_name: "fonts/BalooChettan2-Bold.ttf"
+            font_size: 14
             text_size: self.size
             padding_x: 30
             halign: "left"

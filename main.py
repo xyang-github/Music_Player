@@ -33,8 +33,8 @@ class MusicPlayer(Screen):
 
     def load_window(self):
         """Creates a pop-up instance, using contents of the Dialog box, and opens it"""
-        load_window = LoadDialog(load=self.load_track, cancel=self.dismiss_popup)  # passes load and cancel function
-        # to LoadDialog
+        load_window = LoadDialog(load=self.load_track, cancel=self.dismiss_popup)  # passes load and
+        # cancel function to LoadDialog
         self.popup = Popup(title="Load Track",
                            content=load_window,
                            size_hint=(0.9, 0.9))
@@ -64,39 +64,57 @@ class MusicPlayer(Screen):
 
     def song_position(self, dt):
         """Displays duration of song in hh:mm:ss, and updates slider"""
-        current_pos = datetime.timedelta(seconds=self.song.curr_pos)
+        current_pos = datetime.timedelta(seconds=self.song.curr_pos)  # current song position
         current_pos = str(current_pos)[:7]
 
-        track_length = datetime.timedelta(seconds=self.song.duration)
+        track_length = datetime.timedelta(seconds=self.song.duration)  # total duration of song
         track_length = str(track_length)[:7]
 
         self.ids.current_position.text = f"{current_pos} | {track_length}"  # updates text
-        self.ids.song_slider.value = int(self.song.curr_pos)  # updates slider
+        self.ids.song_slider.value = int(self.song.curr_pos)  # updates slider position
+
+    def change_position(self):
+        """Syncs position of song with slider position"""
+        self.song.seek(self.ids.song_slider.value)
 
     def music_information(self):
         """Displays song duration, title, album and artist"""
+
+        # Calls on clock module to repeatedly update audio slider
         if self.song.active:
             self.ids.song_slider.max = int(self.song.duration)
             Clock.schedule_interval(self.song_position, 0.5)
-        else:
-            self.ids.song_duration.text = "---"
 
-        song = mutagen.File(self.file_selection)
-        self.ids.title.text = str(song['TIT2'])  # title
+        song = mutagen.File(self.file_selection)  # music tag information
+
+        try:
+            self.ids.title.text = str(song['TIT2'])  # title
+        except KeyError:
+            self.ids.title.text = "Unknown Title"
+
+        try:
+            self.ids.album.text = str(song['TALB'])  # album
+        except KeyError:
+            self.ids.album.text = "Unknown Album"
+
+        try:
+            self.ids.artist.text = str(song['TPE1'])  # artist
+        except KeyError:
+            self.ids.artist.text = "Unknown Artist"
+
+        try:
+            artwork = song.tags['APIC:'].data  # Extract album cover
+            with open('images/album_cover.jpg', 'wb') as img:
+                img.write(artwork)
+            self.ids.album_art.source = "images/album_cover.jpg"
+        except KeyError:
+            self.ids.album_art.source = "images/default_cover.png"
+        self.ids.album_art.reload()  # refreshes images when changing tracks
 
         # Create an animated title that scrolls horizontally
         scrolling_effect = Animation(x=-400, opacity=0, duration=7)
         scrolling_effect += Animation(pos=(0,0), opacity=1, duration=2)
         scrolling_effect.start(self.ids.title)
-
-        self.ids.album.text = str(song['TALB'])  # album
-        self.ids.artist.text = str(song['TPE1'])  # artist
-
-        artwork = song.tags['APIC:'].data  # Extract album cover
-        with open('images/album_cover.jpg', 'wb') as img:
-            img.write(artwork)
-        self.ids.album_art.source = "images/album_cover.jpg"
-        self.ids.album_art.reload()  # refreshes images when changing tracks
 
 
 class RootWidget(ScreenManager):
