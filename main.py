@@ -88,7 +88,6 @@ class MusicPlayer(Screen):
 
     def music_information(self):
         """Displays song duration, title, album and artist"""
-
         unknown = ["Unknown Title", "Unknown Album", "Unknown Artist"]
 
         # Calls on clock module to repeatedly update audio slider
@@ -98,7 +97,7 @@ class MusicPlayer(Screen):
 
         song = mutagen.File(self.file_selection)  # music tag information
         file_extension = str(type(song))
-        if 'mutagen.flac.FLAC' in file_extension:
+        if 'mutagen.flac.FLAC' in file_extension:  # if file is FLAC, extract meta data
             try:
                 self.ids.title.text = str(song['TITLE'][0])
             except KeyError:
@@ -123,7 +122,7 @@ class MusicPlayer(Screen):
             except KeyError:
                 self.ids.album_art.source = "images/default_cover.png"
 
-        elif 'mutagen.mp3.MP3' in file_extension:
+        elif 'mutagen.mp3.MP3' in file_extension:  # if file is MP3, extract metadata
             try:
                 self.ids.title.text = str(song['TIT2'])  # title
             except KeyError:
