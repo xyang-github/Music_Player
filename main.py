@@ -1,5 +1,6 @@
 import datetime
 import mutagen
+from mutagen.flac import Picture, FLAC
 from kivy.animation import Animation
 from kivy.app import App
 from kivy.clock import Clock
@@ -42,11 +43,16 @@ class MusicPlayer(Screen):
 
     def load_track(self, file_selection):
         """Stores path to selected file to file_selection"""
+        self.load_track_to_play(file_selection)
+
+    def load_track_to_play(self, file_selection):
         self.song = Playback()  # instantiates Playback object for song
         self.file_selection = file_selection[0]  # stores path list as string
         self.dismiss_popup()  # closes load_window pop-up once track is selected
         self.song.load_file(self.file_selection)
         self.ids.play_pause.disabled = False
+        self.ids.song_slider.opacity = 1  # make slider appear when song is loaded
+        self.ids.song_slider.disabled = False
         self.song.play()
         self.music_information()
         self.ids.play_pause.background_normal = "images/Pause-normal.png"
@@ -75,10 +81,15 @@ class MusicPlayer(Screen):
 
     def change_position(self):
         """Syncs position of song with slider position"""
-        self.song.seek(self.ids.song_slider.value)
+        try:
+            self.song.seek(self.ids.song_slider.value)
+        except AttributeError:
+            return
 
     def music_information(self):
         """Displays song duration, title, album and artist"""
+
+        unknown = ["Unknown Title", "Unknown Album", "Unknown Artist"]
 
         # Calls on clock module to repeatedly update audio slider
         if self.song.active:
@@ -86,29 +97,55 @@ class MusicPlayer(Screen):
             Clock.schedule_interval(self.song_position, 0.5)
 
         song = mutagen.File(self.file_selection)  # music tag information
+        file_extension = str(type(song))
+        if 'mutagen.flac.FLAC' in file_extension:
+            try:
+                self.ids.title.text = str(song['TITLE'][0])
+            except KeyError:
+                self.ids.title.text = unknown[0]
 
-        try:
-            self.ids.title.text = str(song['TIT2'])  # title
-        except KeyError:
-            self.ids.title.text = "Unknown Title"
+            try:
+                self.ids.album.text = str(song['ALBUM'][0])
+            except KeyError:
+                self.ids.album.text = unknown[1]
 
-        try:
-            self.ids.album.text = str(song['TALB'])  # album
-        except KeyError:
-            self.ids.album.text = "Unknown Album"
+            try:
+                self.ids.artist.text = str(song['ARTIST'][0])
+            except KeyError:
+                self.ids.album.text = unknown[2]
 
-        try:
-            self.ids.artist.text = str(song['TPE1'])  # artist
-        except KeyError:
-            self.ids.artist.text = "Unknown Artist"
+            try:
+                artwork = FLAC(self.file_selection).pictures
+                if artwork:
+                    with open('images/album_cover.jpg', 'wb') as img:
+                        img.write(artwork[0].data)
+                    self.ids.album_art.source = "images/album_cover.jpg"
+            except KeyError:
+                self.ids.album_art.source = "images/default_cover.png"
 
-        try:
-            artwork = song.tags['APIC:'].data  # Extract album cover
-            with open('images/album_cover.jpg', 'wb') as img:
-                img.write(artwork)
-            self.ids.album_art.source = "images/album_cover.jpg"
-        except KeyError:
-            self.ids.album_art.source = "images/default_cover.png"
+        elif 'mutagen.mp3.MP3' in file_extension:
+            try:
+                self.ids.title.text = str(song['TIT2'])  # title
+            except KeyError:
+                self.ids.title.text = unknown[0]
+            try:
+                self.ids.album.text = str(song['TALB'])  # album
+            except KeyError:
+                self.ids.album.text = unknown[1]
+
+            try:
+                self.ids.artist.text = str(song['TPE1'])  # artist
+            except KeyError:
+                self.ids.artist.text = unknown[2]
+
+            try:
+                artwork = song.tags['APIC:'].data  # Extract album cover
+                with open('images/album_cover.jpg', 'wb') as img:
+                    img.write(artwork)
+                self.ids.album_art.source = "images/album_cover.jpg"
+            except KeyError:
+                self.ids.album_art.source = "images/default_cover.png"
+
         self.ids.album_art.reload()  # refreshes images when changing tracks
 
         # Create an animated title that scrolls horizontally
