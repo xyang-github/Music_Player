@@ -5,6 +5,7 @@
         orientation: "vertical"
         FileChooserListView:
             id: filedirectory
+            filters: ['*.flac', '*.mp3']
         BoxLayout:
             size_hint_y: None
             height: 50
@@ -32,7 +33,9 @@
             height: 15
             cursor_size: 10, 10
             background_width: 10
-            min: 0
+            opacity: 0
+            disabled: True
+            min:
             max:
             value:
             on_touch_up: root.change_position()
